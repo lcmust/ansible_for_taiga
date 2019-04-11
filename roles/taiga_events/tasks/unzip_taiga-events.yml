@@ -1,0 +1,9 @@
+- name: unzip taiga-events.zip 
+  become: true
+  become_user: taiga
+  unarchive:
+    src: "{{ item }}"
+    dest: /home/taiga/
+    mode: 0775
+  with_items:
+    - /vagrant/taiga/taiga-events-master.zip

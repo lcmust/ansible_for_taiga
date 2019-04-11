@@ -1,0 +1,10 @@
+---
+- import_playbook: play_taiga-requirements.yml
+- import_playbook: play_postgres.yml
+- import_playbook: play_rabbitmq.yml
+- import_playbook: play_taiga-back.yml
+- import_playbook: play_taiga-front.yml
+- import_playbook: play_taiga-events.yml
+- import_playbook: play_taiga-service.yml
+- import_playbook: play_taiga-nginx.yml
+

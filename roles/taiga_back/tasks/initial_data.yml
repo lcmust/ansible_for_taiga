@@ -1,0 +1,27 @@
+#- name: initial database
+#  become: true
+#  become_user: taiga
+#  shell: python mangae.py --help
+#    #- python manage.py migrate --noinput
+#    #- python manage.py loaddata initial_user
+#    #- python manage.py loaddata initial_project_templates
+#    #- python manage.py compilemessages
+#    #- python manage.py collectstatic --noinput
+#  args:
+#    chdir: /home/taiga/taiga-back-stable/
+#    executable: . /home/taiga/venvs/taiga/bin/activate
+
+- name: copy init-shell file to remote
+  become: true
+  become_user: taiga
+  copy:
+    src: scripts/initial_database.sh
+    dest:  /home/taiga/
+    owner: taiga
+    group: taiga
+    mode: 0775
+
+- name: run init-shell file at remote
+  become: true
+  become_user: taiga
+  shell: /bin/bash /home/taiga/initial_database.sh

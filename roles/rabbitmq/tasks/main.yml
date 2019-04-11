@@ -1,0 +1,8 @@
+- name: "create rabbitmq host "
+  include: create_host.yml
+  #when: loader == "true"
+
+- name: "create rabbitmq user "
+  include: create_user.yml
+  #when: loader == "true"
+

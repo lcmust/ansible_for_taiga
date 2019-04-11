@@ -1,0 +1,7 @@
+---
+pkg:
+  - postgresql-9.5
+  - postgresql-contrib-9.5
+  - postgresql-doc-9.5
+  - postgresql-server-dev-9.5
+

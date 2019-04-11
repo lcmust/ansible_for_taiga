@@ -1,0 +1,6 @@
+[global]
+timeout = 60
+index-url = http://pypi.douban.com/simple/
+## index-url = http://mirrors.tuna.tsinghua.edu.cn/pypi/simple/
+[search]
+## index = http://pypi.douban.com/simple/

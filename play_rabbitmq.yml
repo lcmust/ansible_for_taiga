@@ -1,0 +1,9 @@
+---
+- name: Add  rabbitmq user
+  hosts: "{{ deploy_hosts }}"
+  gather_facts: no
+  become: true
+  vars_files:
+    - group_vars/rabbitmq_taiga
+  roles:
+    - rabbitmq

@@ -1,0 +1,19 @@
+- name: "copy taiga_events.service"
+  become: true
+  template:
+    src: taiga_events.service
+    dest: /etc/systemd/system/taiga_events.service
+    owner: root
+    mode: 0644
+
+- name: "systemctl daemon-reload"
+  become: true
+  shell: systemctl daemon-reload
+
+- name: "systemctl start taiga_events"
+  become: true
+  shell: systemctl start taiga_events
+
+- name: "systemctl enable taiga_events"
+  become: true
+  shell: systemctl enable taiga_events

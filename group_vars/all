@@ -1,0 +1,2 @@
+---
+test_server_ip: "{{ ansible_host }}"

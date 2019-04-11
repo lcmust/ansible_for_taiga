@@ -1,0 +1,17 @@
+- name: "rm nginx default conf"
+  become: true
+  file:
+    dest: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: "copy nginx  conf"
+  become: true
+  template:
+    src: "{{ server_type }}.conf"
+    dest: /etc/nginx/conf.d/
+    owner: root
+    mode: 0644
+
+- name: "systemctl restart nginx"
+  become: true
+  shell: systemctl restart nginx

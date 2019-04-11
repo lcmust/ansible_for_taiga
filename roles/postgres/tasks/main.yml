@@ -1,0 +1,10 @@
+- name: "install postgres"
+  include: install_postgres.yml
+
+- name: "create database"
+  include: create_database.yml
+  #when: loader == "true"
+
+- name: "create user"
+  include: create_user.yml
+  #when: loader == "true"

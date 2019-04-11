@@ -1,0 +1,8 @@
+---
+group_name: 'taiga'
+group_id: '1010'
+group_state: 'present'
+user_name: 'taiga'
+user_state: 'present'
+user_comment: 'User for taigai.io'
+user_id: '1010'

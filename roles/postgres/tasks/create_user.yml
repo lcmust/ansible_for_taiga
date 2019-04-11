@@ -1,0 +1,11 @@
+- postgresql_user:
+    db: "{{ postgresql_db_name }}"
+    name: "{{ postgresql_user_name }}"
+    # echo "md5$(echo -n 'verysecretpasswordJOE' | md5sum)"
+    # echo "md5$(echo -n 'taiga123321taiga' | md5sum)"
+    #password: md5d011966da94d776cf59bf6dbde240e5d
+    #password: md5710d95df9e4c479be08ecfcc699dc229
+    password: "{{ postgresql_user_password }}"
+    #expires:
+    state: present
+    priv: ALL

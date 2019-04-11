@@ -1,0 +1,10 @@
+---
+- name: taiga-back
+  hosts: "{{ deploy_hosts }}"
+  gather_facts: no
+  vars_files:
+    - group_vars/postgres_taiga
+    - group_vars/rabbitmq_taiga
+    - group_vars/taiga_back
+  roles:
+    - taiga_back

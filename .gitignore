@@ -1,0 +1,7 @@
+*~
+*.bak
+*.swp
+*.retry
+
+/playbook/group_vars/busins
+/playbook/group_vars/recovery_last

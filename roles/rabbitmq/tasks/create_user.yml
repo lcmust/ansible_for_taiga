@@ -1,0 +1,18 @@
+- rabbitmq_user:
+    user: "{{ rabbitmq_user }}"
+    password: "{{ rabbitmq_password }}"
+    vhost: /
+    configure_priv: "{{ rabbitmq_priv }}"
+    read_priv: "{{ rabbitmq_priv }}"
+    write_priv: "{{ rabbitmq_priv }}"
+    state: present
+
+- rabbitmq_user:
+   user: "{{ rabbitmq_user }}"
+   password: "{{ rabbitmq_password }}"
+   permissions:
+     - vhost: "{{ rabbitmq_host }}"
+       configure_priv: "{{ rabbitmq_priv }}"
+       read_priv: "{{ rabbitmq_priv }}"
+       write_priv: "{{ rabbitmq_priv }}"
+   state: present

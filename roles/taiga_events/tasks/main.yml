@@ -1,0 +1,8 @@
+- name: unzip taiga-events-master files
+  include: unzip_taiga-events.yml
+
+- name: preinstall nodejs
+  include: install_nodejs.yml
+
+- name: install taiga_events.service
+  include: taiga_events.service.yml

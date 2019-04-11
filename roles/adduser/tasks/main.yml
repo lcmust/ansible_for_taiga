@@ -1,0 +1,17 @@
+- name: create new user group
+  become: true
+  group:
+    name: "{{ group_name }}"
+    gid: "{{ group_id }}"
+    state: "{{ group_state }}"
+
+- name: create taiga user
+  become: true
+  #vars_files:
+  #  - group_vars/taiga_user
+  user:
+    name: "{{ user_name }}"
+    group: "{{ group_name }}"
+    comment: "{{ user_comment }}"
+    uid: "{{ user_id }}"
+    state: "{{ user_state }}"

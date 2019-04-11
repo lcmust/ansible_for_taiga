@@ -1,0 +1,5 @@
+---
+rabbitmq_host: /taiga
+rabbitmq_user: taiga
+rabbitmq_password: taiga123
+rabbitmq_priv: .*

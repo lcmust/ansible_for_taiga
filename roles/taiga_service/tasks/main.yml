@@ -1,0 +1,19 @@
+- name: "copy taiga.service"
+  become: true
+  template:
+    src: taiga.service
+    dest: /etc/systemd/system/taiga.service
+    owner: root
+    mode: 0644
+
+- name: "systemctl daemon-reload"
+  become: true
+  shell: systemctl daemon-reload
+
+- name: "systemctl start taiga"
+  become: true
+  shell: systemctl start taiga
+
+- name: "systemctl enable taiga"
+  become: true
+  shell: systemctl enable taiga

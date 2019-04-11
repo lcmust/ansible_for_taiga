@@ -1,0 +1,15 @@
+- name: Install postgres
+  #apt: pkg={{ item }} state=present
+  apt: pkg={{ postgresql_pkg }} state=present
+  become: true
+  become_user: root
+  #with_items: {{ postgresql_pkg }}
+    # - postgresql-9.5
+    # - postgresql-contrib-9.5
+    # - postgresql-doc-9.5
+    # - postgresql-server-dev-9.5
+  #with_items: " {{ to_install_pkg }} "
+  # - git
+  # - subversion
+  # - vim
+  # - diffutils

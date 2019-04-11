@@ -1,0 +1,40 @@
+- name: create taiga-test dir
+  become: true
+  become_user: taiga
+  file:
+    path: /home/taiga/taiga-test
+    owner: taiga
+    group: taiga
+    state: directory
+    mode: 0775
+    
+- name: unzip taiga-back 
+  become: true
+  become_user: taiga
+  unarchive:
+    src: "{{ item }}"
+    dest: /home/taiga/
+    mode: 0775
+  with_items:
+    - /vagrant/taiga/taiga-back-stable.zip
+    - /vagrant/taiga/taiga-front-dist-stable.zip
+
+- name: copy configuration file 
+  become: true
+  become_user: taiga
+  copy:
+    src:  /home/taiga/taiga-front-dist-stable/dist/conf.example.json
+    dest:  /home/taiga/taiga-front-dist-stable/dist/conf.json
+    owner: taiga
+    group: taiga
+    mode: 0775
+    remote_src: true
+
+
+- name: "modifi taiga-front conf.json: taiga-back listen port to 8001"
+  become: true
+  become_user: taiga
+  lineinfile:
+    path: /home/taiga/taiga-front-dist-stable/dist/conf.json
+    regexp: '    "api": "http://localhost:8000/api/v1/",'
+    line: '    "api": "http://{{ taiga_server_ip }}:80/api/v1/",'

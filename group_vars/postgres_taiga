@@ -1,0 +1,20 @@
+---
+# pkg
+postgresql_pkg:
+    - postgresql-9.5
+    - postgresql-contrib-9.5
+    - postgresql-doc-9.5
+    - postgresql-server-dev-9.5
+    # for postgres
+    - python-psycopg2
+
+# database
+postgresql_db_name: 'taiga'
+postgresql_db1_name: 'taiga1'
+
+# user && pwd
+postgresql_user_name: 'taiga'
+# echo "md5$(echo -n 'verysecretpasswordJOE' | md5sum)"
+# echo "md5$(echo -n 'taiga123321taiga' | md5sum)"
+#password: md5d011966da94d776cf59bf6dbde240e5d
+postgresql_user_password: 'md5710d95df9e4c479be08ecfcc699dc229'

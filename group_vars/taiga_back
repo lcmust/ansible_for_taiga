@@ -1,0 +1,13 @@
+---
+# taiga_back config user IP-address
+# taiga_server_ip: "192.168.56.203"
+taiga_server_ip: "{{ ansible_host }}"
+
+# taiga virtualenv path
+taiga_user_pipenv: '/home/taiga/venvs/taiga'
+
+# taiga django secret-key
+taiga_secret_key: 'theveryultratopsecretkey'
+
+# taiga EVENT
+PASSWORD_FOR_EVENTS: ""

@@ -1,0 +1,12 @@
+- name: Installing softwares and  tools
+  #apt: pkg={{ item }} state=present
+  apt: pkg={{ pkg }} state=present
+  become: true
+  become_user: root
+  #with_items: " {{ install_pkg }} "
+  # - git
+  # - subversion
+  # - vim
+  # - diffutils
+
+

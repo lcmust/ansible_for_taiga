@@ -1,0 +1,68 @@
+- name: create taiga-test dir
+  become: true
+  become_user: taiga
+  file:
+    path: /home/taiga/taiga-test/logs
+    owner: taiga
+    group: taiga
+    state: directory
+    mode: 0775
+
+#- name: copy taiga-back-stable.zip to remote
+#  become: true
+#  become_user: taiga
+#  copy:
+#    src: /vagrant/taiga/taiga-back-stable.zip
+#    dest:  /home/taiga/
+#    owner: taiga
+#    group: taiga
+#    mode: 0775
+ 
+- name: unzip taiga-back 
+  become: true
+  become_user: taiga
+  unarchive:
+    src: "{{ item }}"
+    dest: /home/taiga/
+    mode: 0775
+  with_items:
+    - /vagrant/taiga/taiga-back-stable.zip
+    #- /vagrant/taiga/taiga-front-stable.zip
+
+- name: modifi TIME_ZONE settings/common.py
+  become: true
+  become_user: taiga
+  lineinfile:
+    path: /home/taiga/taiga-back-stable/settings/common.py
+    regexp: 'TIME_ZONE = "UTC"'
+    line: 'TIME_ZONE = "Asia/Shanghai"'
+
+- name: modifi USE_TZ = False  settings/common.py
+  become: true
+  become_user: taiga
+  lineinfile:
+    path: /home/taiga/taiga-back-stable/settings/common.py
+    regexp: 'USE_TZ = True'
+    line: 'USE_TZ = False'
+
+#- name: "replace localhost:8000 => 192.168.56.203  settings/common.py"
+#  become: true
+#  become_user: taiga
+#  replace:
+#    path: /home/taiga/taiga-back-stable/settings/common.py
+#    regexp: '(.*)(localhost:8000)(.*)'
+#    replace: '\1192.168.56.203\3'
+#    owner: taiga
+#    group: taiga
+#    mode: 0664
+#    #backrefs: yes
+
+- name: copy local.py settings/local.py
+  become: true
+  become_user: taiga
+  template:
+    src: local.py
+    dest: /home/taiga/taiga-back-stable/settings/local.py
+    owner: taiga
+    group: taiga
+    mode: 0644

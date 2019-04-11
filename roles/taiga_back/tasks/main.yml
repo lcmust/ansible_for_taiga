@@ -1,0 +1,8 @@
+- name: copy taiga-back-stable files
+  include: copyzip.yml
+
+- name: py virtualenv for taiga
+  include: pyvirtualenv.yml
+
+- name: initial taiga database
+  include: initial_data.yml

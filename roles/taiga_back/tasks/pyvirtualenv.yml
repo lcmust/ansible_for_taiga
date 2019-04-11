@@ -1,0 +1,38 @@
+#- name: modifi requirements.txt
+#  become: true
+#  become_user: taiga
+#  shell: sed -i -e 's@ https://pypi.org/simple@ https://mirrors.aliyun.com/pypi/simple/@g' /home/taiga/taiga-back-stable/requirements.txt
+#
+- name: modifi requirements.txt
+  become: true
+  become_user: taiga
+  lineinfile:
+    path: /home/taiga/taiga-back-stable/requirements.txt
+    regexp: '^-i https://pypi.org/simple$'
+    line: '-i https://pypi.doubanio.com/simple/ '
+    #line: '-i https://pypi.douban.com/simple/'
+
+- name: copy .pip to user home
+  become: true
+  become_user: taiga
+  copy:
+    src: .pip
+    dest:  /home/taiga/
+    owner: taiga
+    group: taiga
+    mode: 0775
+
+- name: update virtualenv
+  become: true
+  become_user: root
+  shell:  pip install -U virtualenv
+
+- name: create virtualenv pip requirements
+  become: true
+  become_user: taiga
+  pip:
+    requirements: /home/taiga/taiga-back-stable/requirements.txt
+    virtualenv: "{{ taiga_user_pipenv }}"
+    virtualenv_python: python3
+    #virtualenv_command: /usr/local/bin/virtualenv
+    #extra_args:  -p/usr/bin/python3 

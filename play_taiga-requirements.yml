@@ -1,0 +1,38 @@
+---
+- name: Update repo
+  hosts: "{{ deploy_hosts }}"
+  gather_facts: no
+  roles:
+    - repo_tsinghua
+
+- name: Install softwares of taiga_essential
+  hosts: "{{ deploy_hosts }}"
+  gather_facts: no
+  vars_files:
+    - group_vars/taiga_pkg_essential
+  roles:
+    - common
+
+- name: Install softwares of taiga_python
+  hosts: "{{ deploy_hosts }}"
+  gather_facts: no
+  vars_files:
+    - group_vars/taiga_pkg_python
+  roles:
+    - common
+
+# - name: Install softwares of taiga_postgres
+#   hosts: "{{ deploy_hosts }}"
+#   gather_facts: no
+#   vars_files:
+#     - group_vars/taiga_pkg_postgres
+#   roles:
+#     - common
+
+- name: Add taiga_user
+  hosts: "{{ deploy_hosts }}"
+  gather_facts: no
+  vars_files:
+    - group_vars/taiga_user
+  roles:
+    - adduser
