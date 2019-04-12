@@ -1,0 +1,25 @@
+---
+- hosts: "{{ deploy_hosts }}"
+  gather_facts: no
+  tasks:
+    - name: copy data backup file to remote
+      become: true
+      become_user: taiga
+      copy:
+        src: /vagrant/taiga/pg_taiga_bak.sql
+        dest:  /home/taiga/
+        owner: taiga
+        group: taiga
+        mode: 0775
+
+    - name: restore postgres data for taiga-test
+      become: true
+      become_user: postgres
+      postgresql_db:
+        name: taiga
+        #encoding: UTF-8
+        #lc_collate: zh_CN.UTF-8
+        #lc_ctype: zh_cn.UTF-8
+        state: restore
+        target: /home/taiga/pg_taiga_bak.sql
+        #target_opts: " -c "

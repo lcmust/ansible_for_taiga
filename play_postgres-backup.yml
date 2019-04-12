@@ -1,0 +1,23 @@
+---
+- hosts: "{{ deploy_hosts }}"
+  gather_facts: no
+  tasks:
+    - name: backup postgres data for taiga-test
+      become: true
+      become_user: postgres
+      postgresql_db:
+        name: taiga
+        #encoding: UTF-8
+        #lc_collate: zh_CN.UTF-8
+        #lc_ctype: zh_cn.UTF-8
+        state: dump
+        target: /tmp/pg_taiga_bak.sql
+        target_opts: " -c "
+
+    - name: fetch data backup file.
+      become: true
+      become_user: taiga
+      fetch:
+        src: /tmp/pg_taiga_bak.sql
+        dest:  /vagrant/taiga/pg_taiga_bak.sql
+        flat: yes

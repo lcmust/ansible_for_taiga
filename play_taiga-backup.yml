@@ -1,0 +1,5 @@
+---
+# backup database
+- import_playbook: play_postgres-backup.yml
+# backup user file
+- import_playbook: play_backup-taiga-user-files.yml

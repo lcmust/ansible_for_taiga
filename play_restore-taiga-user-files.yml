@@ -1,0 +1,31 @@
+---
+- hosts: "{{ deploy_hosts }}"
+  gather_facts: no
+  tasks:
+    - name: unarchive taiga back-file to directory "/home/taiga/taiga-back-stable/media"
+      become: true
+      become_user: taiga
+      unarchive:
+        src:  /vagrant/taiga/taiga_media.tgz
+        dest:  /home/taiga/taiga-back-stable/
+        extra_opts:
+        - --transform
+        - s/taiga_back_stable-media/media/
+
+    # - name: copy taiga backup files
+    #   become: true
+    #   become_user: taiga
+    #   copy:
+    #     src:  /vagrant/taiga/taiga_media.tgz
+    #     dest:  /home/taiga/taiga_media.tgz
+    #     owner: taiga
+    #     group: taiga
+    #     mode: 0755
+
+    # - name: unarchive directory "/home/taiga/taiga-back-stable/media"
+    #   become: true
+    #   become_user: taiga
+    #   unarchive:
+    #     src:  /home/taiga/taiga_media.tgz
+    #     dest:  /home/taiga/taiga-back-stable/media/
+    #     remote_src: yes

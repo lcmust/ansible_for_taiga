@@ -3,6 +3,10 @@
 - import_playbook: play_postgres.yml
 - import_playbook: play_rabbitmq.yml
 - import_playbook: play_taiga-back.yml
+# restore database
+- import_playbook: play_postgres-restore.yml
+# restore user file
+- import_playbook: play_restore-taiga-user-files.yml
 - import_playbook: play_taiga-front.yml
 - import_playbook: play_taiga-events.yml
 - import_playbook: play_taiga-service.yml

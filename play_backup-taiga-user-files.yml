@@ -1,0 +1,18 @@
+---
+- hosts: "{{ deploy_hosts }}"
+  gather_facts: no
+  tasks:
+    - name: Compress directory /home/taiga/taiga-back-stable/media
+      become: true
+      become_user: taiga
+      archive:
+        path:  /home/taiga/taiga-back-stable/media
+        dest:  /home/taiga/taiga_media.tgz
+
+    - name: fetch user profile files
+      become: true
+      become_user: root
+      fetch:
+        src:  /home/taiga/taiga_media.tgz
+        dest:  /vagrant/taiga/taiga_media.tgz
+        flat: yes

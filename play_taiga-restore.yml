@@ -1,0 +1,5 @@
+---
+# restore database
+- import_playbook: play_postgres-restore.yml
+# restore user file
+- import_playbook: play_restore-taiga-user-files.yml

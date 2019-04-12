@@ -1,20 +1,25 @@
-# install nodejs (method 1)
-- name: pre-install nodejs
+---
+# install nodejs (method 2)
+- name: install nodejs from aliyun
   become: true
   become_user: root
-  # shell: curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-  shell: curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+  unarchive:
+    src: https://npm.taobao.org/mirrors/node/v10.15.3/node-v10.15.3-linux-x64.tar.xz
+    dest: /usr/local/
+    # /usr/local/node-v10.15.3-linux-x64
+    remote_src: yes
 
-- name: "Run the equivalent of 'apt-get update' as a separate step"
-  become: true
-  apt:
-    update_cache: yes
-
-- name: install nodejs
-  #apt: pkg={{ item }} state=present
-  apt: pkg=nodejs state=present
+- name: link node -> /usr/bin/
   become: true
   become_user: root
+  file:
+    src: '/usr/local/node-v10.15.3-linux-x64/bin/{{ item.src }}'
+    dest: '/usr/local/bin/{{ item.dest }}'
+    state: link
+  with_items:
+    - { src: 'node', dest: 'node' }
+    - { src: 'npm', dest: 'npm' }
+    - { src: 'npx', dest: 'npx' }
 
 - name: npm config set registry https://registry.npm.taobao.org
   become: true

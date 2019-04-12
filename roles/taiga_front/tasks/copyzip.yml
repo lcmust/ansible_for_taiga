@@ -8,7 +8,7 @@
     state: directory
     mode: 0775
     
-- name: unzip taiga-back 
+- name: unzip taiga-front 
   become: true
   become_user: taiga
   unarchive:
@@ -16,7 +16,7 @@
     dest: /home/taiga/
     mode: 0775
   with_items:
-    - /vagrant/taiga/taiga-back-stable.zip
+    # - /vagrant/taiga/taiga-back-stable.zip
     - /vagrant/taiga/taiga-front-dist-stable.zip
 
 - name: copy configuration file 
